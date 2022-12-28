@@ -1,0 +1,105 @@
+
+<div class="main-container">
+  <section class="naslov">
+    <div class="containerNaslov">
+      <div class="red">
+        <div class="text_center">
+          <h3 class="uppercase mb0">DUHOVNE VJEŽBE</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  <button style="background-color:darkgray" type="button" class="btn  btn-lg btn-block " (click)="BtnDodajVjezbu()">Dodaj vježbu</button>
+
+
+  <td *ngFor="let s of getPodaci()" >
+      <section>
+        <div class="container">
+          <div class="children">
+            <div class="slika">
+              <img class="slika" src="{{getSlika(s)}}" class="img-fluid rounded-start" >
+            </div>
+            <div class="tekst">
+              <h2>{{s.naslov}}</h2>
+            <ul>
+              <h5>{{s.datumPocetka|date:'MM/dd/yyyy'}}{{" - "}}{{s.datumZavrsetka|date:'MM/dd/yyyy'}}</h5>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
+                  <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+                  <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+                </svg>
+
+
+                <span>  Prijave <strong class="color-red"> {{s.isActive==false?"su završile":"su aktivne"}} </strong> </span>
+              </li>
+
+              <li>
+                <i class="bi bi-calendar"></i>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                  </svg>
+                  <span>  Trajanje vježbi: <strong class="color-primary">{{s.trajanje}} dana</strong></span>
+              </li>
+          </ul>
+              <p>{{s.opis}}</p>
+              <button type="button" class="btn btn-secondary" (click)="BtnVise(s)" >VIŠE</button>
+              <button type="button" class="btn btn-secondary" (click)="BtnObrisi(s)" >OBRIŠI</button>
+              <button type="button" class="btn btn-secondary" (click)="BtnUredi(s)" >UREDI</button>
+
+            </div>
+          </div>
+        </div>
+      </section>
+  </td>
+</div>
+
+<div *ngIf="novaVjezba!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel" >{{novaVjezba.id==0?"Dodaj novu vijest":"Uredi vijest"}} </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="novaVjezba=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Naslov</label>
+          <input class="form-control" placeholder="Naslov" [(ngModel)]="novaVjezba.naslov">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Opis</label>
+          <input class="form-control" placeholder="Opis" [(ngModel)]="novaVjezba.opis"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Datum pocetka</label>
+          <input class="form-control" type="date" placeholder="Datum" [(ngModel)]="novaVjezba.datumPocetka"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Datum zavrsetka</label>
+          <input class="form-control" type="date" placeholder="Datum" [(ngModel)]="novaVjezba.datumZavrsetka"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Je li aktivna</label>
+          <input class="form-control" placeholder="check-box" [(ngModel)]="novaVjezba.isActive"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" >Nova slika</label>
+          <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()"/>
+          <img style="max-width: 100%;max-height: 200px" src="{{novaVjezba.slika_nova_base64}}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Moderator ID</label>
+          <input class="form-control"  placeholder="Moderator ID" [(ngModel)]="novaVjezba.moderatorId"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Trajanje</label>
+          <input class="form-control"  placeholder="Trajanje" [(ngModel)]="novaVjezba.trajanje"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="novaVjezba=null">Close</button>
+          <button type="button" class="btn btn-primary" (click)="BtnSnimi()">Save changes</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

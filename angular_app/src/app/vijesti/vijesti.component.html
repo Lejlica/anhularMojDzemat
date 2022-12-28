@@ -1,0 +1,124 @@
+<!--<button style="background-color:darkgray" type="button" class="btn  btn-lg btn-block " (click)="BtnDodajVijest()">Dodaj novu vijest</button>
+
+<td  *ngFor="let s of getPodaci()">
+
+  <head>
+    <title>Bootstrap Cards</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card">
+
+        <div class="image-grid-container">
+          <img src="{{getSlika(s)}}">
+        </div>
+
+        <div class="card-body">
+          <h4 class="card-title">{{s.naslov}}</h4>
+
+          <a class="btn btn-primary" (click)="BtnProcitajViseOVijest(s)">Procitaj vise</a>
+          <a class="btn btn-secondary" (click)="Obrisi(s)">Obrisi</a>
+
+        </div>
+
+      </div>
+    </div>
+  </body>
+
+</td>
+-->
+
+
+
+
+  <div *ngIf="novaVijest!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel" >{{novaVijest.id==0?"Dodaj novu vijest":"Uredi vijest"}} </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="novaVijest=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Naslov</label>
+            <input class="form-control" placeholder="Naslov" [(ngModel)]="novaVijest.naslov">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tekst</label>
+            <input class="form-control" placeholder="Tekst" [(ngModel)]="novaVijest.tekst"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Datum</label>
+            <input class="form-control" type="date" placeholder="Datum" [(ngModel)]="novaVijest.datum"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Imam</label>
+            <input class="form-control" placeholder="Imam" [(ngModel)]="novaVijest.ImamId"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Autor</label>
+            <input class="form-control" [(ngModel)]="novaVijest.autor"/>
+          </div>
+             <div class="mb-3">
+                <label class="form-label" >Nova slika</label>
+                <input class="form-control" id="slika-input" type="file" accept="image/*" (change)="generisi_preview()"/>
+                <img style="max-width: 100%;max-height: 200px" src="{{novaVijest.image_nova_base64}}">
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="novaVijest=null">Close</button>
+                <button type="button" class="btn btn-primary" (click)="BtnSnimi()">Save changes</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <div class="main-container">
+    <section class="naslov">
+      <div class="containerNaslov">
+        <div class="red">
+          <div class="text_center">
+            <h3 class="uppercase mb0">VIJESTI</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button style="background-color:darkgray" type="button" class="btn  btn-lg btn-block " (click)="BtnDodajVijest()">Dodaj novu vijest</button>
+
+    <td *ngFor="let s of getPodaci()" >
+  <section>
+    <div class="container">
+      <div class="children">
+        <div class="slika">
+          <img class="slika" src="{{getSlika(s)}}" class="img-fluid rounded-start" >
+        </div>
+        <div class="tekst">
+          <h2>{{s.naslov}}</h2>
+          <h5>{{s.opis}}</h5>
+          <button type="button" class="btn btn-secondary" (click)="BtnUredi(s)" >UREDI</button>
+          <button type="button" class="btn btn-secondary" (click)="Obrisi(s)" >OBRIŠI</button>
+          <button type="button" class="btn btn-secondary" (click)="BtnProcitajViseOVijest(s)">VIŠE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</td>
+</div>
+
+
+
+
+
+
+
+

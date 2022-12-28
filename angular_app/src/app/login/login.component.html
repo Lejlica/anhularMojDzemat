@@ -1,0 +1,48 @@
+<!--
+<div class="container">
+
+  <div class="mb-3 row">
+    <label for="txtKorisnickoIme" class="col-sm-2 col-form-label">Korisnicko ime</label>
+    <div class="col-sm-3">
+      <input id="txtKorisnickoIme" [(ngModel)]="txtKorisnickoIme" class="form-control">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="txtLozinka" class="col-sm-2 col-form-label">Lozinka</label>
+    <div class="col-sm-3">
+      <input id="txtLozinka" [(ngModel)]="txtLozinka" class="form-control" type="password">
+    </div>
+  </div>
+
+
+  <button class="btn btn-primary" (click)="btnLogin()">Logiraj se</button>
+  <br>
+  <a routerLink="/registracija" >Registracija</a>
+</div>
+-->
+<form action="action_page.php" method="post">
+  <div class="imgcontainer">
+    <!--<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
+    <h2>Prijava na MojDžemat.ba</h2>
+  </div>
+
+  <div class="container">
+    <label ><b>Korisnicko ime</b></label>
+    <input id="txtKorisnickoIme" [(ngModel)]="txtKorisnickoIme" type="text" placeholder="Korisnicko ime" name="unameg" required>
+
+    <label ><b>Lozinka</b></label>
+    <input id="txtLozinka" [(ngModel)]="txtLozinka" type="password" placeholder="Lozinka" name="psw" required>
+
+    <button type="submit" (click)="btnLogin()">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+    <a routerLink="/registracija" >Registracija</a>
+  </div>
+</form>
